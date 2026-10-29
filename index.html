@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A W E h Abhishek De Silva – Graphic Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B0F2A;--panel:#151A3D;--ink:#E8ECFF;--muted:#96A0CC;--line:#2A3266;--cyan:#3DE0FF;--violet:#8B6CFF;--pink:#FF5C8A;--sun:#FFC93C;--on:#0B0F2A;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#F1F3FA;--panel:#FFFFFF;--ink:#141A3C;--muted:#55608A;--line:#CDD3E8;--cyan:#0A86AD;--violet:#5B3FE0;--on:#FFFFFF;color-scheme:light}}
+:root[data-theme="light"]{--bg:#F1F3FA;--panel:#FFFFFF;--ink:#141A3C;--muted:#55608A;--line:#CDD3E8;--cyan:#0A86AD;--violet:#5B3FE0;--on:#FFFFFF;color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Sora,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.65;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px;position:relative}
+nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;padding:22px 0;font-weight:600;position:relative;z-index:2}
+nav div{display:flex;flex-wrap:wrap;gap:6px 22px}
+nav a{text-decoration:none;background:linear-gradient(var(--cyan),var(--cyan)) 0 100%/0 2px no-repeat;transition:background-size .3s}
+nav a:hover{background-size:100% 2px}
+.hero{position:relative;min-height:84vh;display:flex;align-items:center}
+#net{position:absolute;inset:0 -50vw;width:100vw;margin:0 auto;left:50%;transform:translateX(-50%);height:100%;z-index:0}
+.heroin{position:relative;z-index:1;padding:40px 0 70px}
+.hero h1{font-size:clamp(2.8rem,10vw,7.5rem);line-height:1;font-weight:800;letter-spacing:-.04em;margin:0 0 18px;min-height:1em}
+.role{font-size:clamp(1.2rem,3vw,1.8rem);font-weight:600;color:var(--cyan);margin:0 0 20px;min-height:1.6em}
+.role::after{content:"";display:inline-block;width:3px;height:1.1em;background:var(--cyan);margin-left:4px;vertical-align:-.15em;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero p.sub{max-width:32em;color:var(--muted);font-size:1.1rem;margin:0 0 30px}
+.btn{display:inline-block;background:var(--cyan);color:var(--on);padding:14px 28px;border-radius:12px;font-weight:600;text-decoration:none;transition:transform .15s,box-shadow .2s;will-change:transform}
+.btn:hover{box-shadow:0 0 0 4px color-mix(in srgb,var(--cyan) 30%,transparent)}
+.marq{overflow:hidden;border-block:1px solid var(--line);padding:16px 0;font-size:1.3rem;font-weight:600;white-space:nowrap}
+.marq span{display:inline-block;padding-left:100%;animation:run 26s linear infinite}
+.marq:hover span{animation-play-state:paused}
+@keyframes run{to{transform:translateX(-100%)}}
+section{padding:70px 0}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.02em;margin:0 0 24px;font-weight:800}
+.note{background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:12px 16px;color:var(--muted);font-size:.92rem;margin-bottom:24px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.filters button{font:inherit;font-weight:600;padding:9px 20px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;transition:border-color .2s,transform .15s}
+.filters button:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.filters button[aria-pressed="true"]{background:var(--cyan);color:var(--on);border-color:var(--cyan)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:26px}
+.tile[hidden]{display:none}
+.tile{perspective:800px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px 12px 16px;transition:transform .2s ease-out,border-color .2s;transform-style:preserve-3d;position:relative;overflow:hidden}
+.card:hover{border-color:var(--cyan)}
+.card::after{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--cyan) 22%,transparent),transparent 60%);opacity:0;transition:opacity .2s;pointer-events:none}
+.card:hover::after{opacity:1}
+.art{aspect-ratio:4/3;border-radius:10px;position:relative;overflow:hidden}
+.art::before,.art::after{content:"";position:absolute;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.card:hover .art::after{transform:rotate(90deg) scale(1.15)}
+.card:hover .art::before{transform:translateY(-8%) scale(1.08)}
+.card h3{margin:14px 6px 0;font-size:1.1rem}
+.card p{margin:0 6px;color:var(--muted);font-size:.92rem}
+.t1{background:var(--pink)}.t1::after{inset:22% 28%;background:var(--bg);border-radius:50%}
+.t2{background:var(--violet)}.t2::after{left:12%;right:12%;top:38%;height:24%;background:var(--sun)}
+.t3{background:var(--sun)}.t3::after{width:55%;aspect-ratio:1;right:-8%;bottom:-12%;background:var(--pink);border-radius:50%}.t3::before{left:12%;top:14%;width:30%;height:50%;background:var(--bg);z-index:1}
+.t4{background:var(--cyan)}.t4::after{inset:18%;border:10px solid var(--bg);border-radius:8px}
+.t5{background:var(--line)}.t5::after{left:30%;top:27%;width:40%;aspect-ratio:1;background:var(--pink);transform:rotate(45deg)}.card:hover .t5::after{transform:rotate(225deg) scale(1.15)}
+.t6{background:linear-gradient(135deg,var(--violet) 50%,var(--sun) 50%)}.t6::after{left:40%;top:40%;width:20%;aspect-ratio:1;background:var(--bg);border-radius:50%}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.two p{margin:0 0 14px;max-width:34em;color:var(--muted)}
+ul.clean{list-style:none;padding:0;margin:0}
+ul.clean li{padding:14px 0;border-bottom:1px solid var(--line);font-weight:600;font-size:1.1rem;transition:padding-left .25s,color .25s}
+ul.clean li:hover{padding-left:14px;color:var(--cyan)}
+.big{font-size:clamp(1.5rem,5vw,3rem);font-weight:800;letter-spacing:-.02em;text-decoration:none;word-break:break-word;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink)) 0 0/200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 6s linear infinite}
+@keyframes flow{to{background-position:-200% 0}}
+footer{padding:36px 0 48px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+#glow{position:fixed;left:0;top:0;width:340px;height:340px;margin:-170px 0 0 -170px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--violet) 22%,transparent),transparent 65%);pointer-events:none;z-index:0;opacity:0;transition:opacity .3s}
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:6px 16px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:.9rem;margin:0 0 20px;color:var(--muted)}
+.pill i{width:9px;height:9px;border-radius:50%;background:#34D399;animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 #34D39988}70%,100%{box-shadow:0 0 0 10px transparent}}
+.sub2{color:var(--muted);max-width:36em;margin:0 0 30px}
+.pk{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}
+.plan{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;flex-direction:column;transition:transform .25s,border-color .25s}
+.plan:hover{transform:translateY(-6px);border-color:var(--cyan)}
+.plan.hot,.ord{border:2px solid transparent;background:linear-gradient(var(--panel),var(--panel)) padding-box,linear-gradient(120deg,var(--cyan),var(--violet),var(--pink),var(--cyan)) border-box;background-size:100% 100%,200% 100%;animation:bd 6s linear infinite}
+@keyframes bd{to{background-position:0 0,200% 0}}
+.plan h3{margin:0 0 4px;font-size:1.3rem}
+.price{font-size:1.5rem;font-weight:800;margin:6px 0 16px;color:var(--cyan)}
+.plan ul{list-style:none;padding:0;margin:0 0 22px;color:var(--muted);flex:1}
+.plan li{padding:6px 0 6px 26px;position:relative}
+.plan li::before{content:"";position:absolute;left:0;top:16px;width:12px;height:2px;background:var(--cyan)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);text-align:center}
+.btn.ghost:hover{border-color:var(--cyan);color:var(--ink)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px;counter-reset:s}
+.step{position:relative;padding-top:60px}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;width:44px;height:44px;border-radius:50%;background:var(--cyan);color:var(--on);display:grid;place-items:center;font-weight:800}
+.step::after{content:"";position:absolute;left:56px;right:-16px;top:21px;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 14px)}
+.step:last-child::after{display:none}
+.step h3{margin:0 0 4px;font-size:1.1rem}.step p{margin:0;color:var(--muted);font-size:.95rem}
+.ord{border-radius:20px;padding:28px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fg .full{grid-column:1/-1}
+label{display:block;font-weight:600;font-size:.92rem;margin-bottom:6px}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+input:focus,select:focus,textarea:focus{border-color:var(--cyan);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--cyan) 30%,transparent)}
+textarea{min-height:120px;resize:vertical}
+.acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+button.btn{border:0;font:inherit;font-weight:600;cursor:pointer}
+button.btn.ghost{border:1px solid var(--line)}
+.msg{color:var(--muted);font-size:.92rem;min-height:1.4em;margin:12px 0 0}
+.pay{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}
+.pc{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column}
+.pc h3{margin:0 0 14px}
+.pc dl{margin:0 0 16px;flex:1}.pc dt{color:var(--muted);font-size:.85rem}.pc dd{margin:0 0 10px;font-weight:600;word-break:break-word}
+.cc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:26px}
+.ct{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid var(--line);background:var(--panel);border-radius:14px;text-decoration:none;font-weight:600;transition:transform .2s,border-color .2s}
+.ct:hover{transform:translateY(-4px);border-color:var(--pink)}
+.ct b{flex:none;width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--violet),var(--cyan));color:var(--on);display:grid;place-items:center;font-size:.95rem}
+.ct span{display:block;color:var(--muted);font-size:.85rem;font-weight:400;word-break:break-word}
+@media (max-width:720px){.two,.fg{grid-template-columns:1fr}.hero{min-height:74vh}.step::after{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.marq span,.big,.role::after{animation:none}.js .rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<div id="glow" aria-hidden="true"></div>
+<div class="wrap">
+<nav aria-label="Main"><span>Abhishek De Silva</span><div><a href="#work">Work</a><a href="#services">Services</a><a href="#order">Order</a><a href="#pay">Pay</a><a href="#about">About</a><a href="#contact">Contact</a></div></nav>
+<header class="hero">
+<canvas id="net" aria-hidden="true"></canvas>
+<div class="heroin">
+<p class="pill"><i></i>Available for new projects</p>
+<h1 id="name" aria-label="Abhishek De Silva">Abhishek De Silva</h1>
+<p class="role" id="role" aria-live="off">Graphic designer</p>
+<p class="sub">I design logos, brands and social media for businesses that want to look sharp online. Move your cursor over the network.</p>
+<a class="btn" id="mag" href="#work">See my work</a>
+</div>
+</header>
+</div>
+<div class="marq" aria-hidden="true"><span>Logo design &nbsp;•&nbsp; Brand identity &nbsp;•&nbsp; Social media &nbsp;•&nbsp; Posters &nbsp;•&nbsp; Packaging &nbsp;•&nbsp; UI graphics &nbsp;•&nbsp; Logo design &nbsp;•&nbsp; Brand identity &nbsp;•&nbsp; Social media &nbsp;•&nbsp; Posters &nbsp;•&nbsp; Packaging</span></div>
+
+<div class="wrap">
+<section id="work">
+<h2 class="rv">Selected work</h2>
+<div class="note rv">Placeholder projects: replace each title, category and description with your real work.</div>
+<div class="filters rv" role="group" aria-label="Filter projects">
+<button type="button" data-f="all" aria-pressed="true">All</button>
+<button type="button" data-f="Branding" aria-pressed="false">Branding</button>
+<button type="button" data-f="Social media" aria-pressed="false">Social media</button>
+<button type="button" data-f="Print" aria-pressed="false">Print</button>
+</div>
+<div class="grid">
+<article class="tile rv" data-c="Branding"><div class="card"><div class="art t1"></div><h3>Project one</h3><p>Branding · Logo and colour system</p></div></article>
+<article class="tile rv" style="--d:.08s" data-c="Print"><div class="card"><div class="art t2"></div><h3>Project two</h3><p>Print · Poster series</p></div></article>
+<article class="tile rv" style="--d:.16s" data-c="Social media"><div class="card"><div class="art t3"></div><h3>Project three</h3><p>Social media · Instagram campaign</p></div></article>
+<article class="tile rv" data-c="Branding"><div class="card"><div class="art t4"></div><h3>Project four</h3><p>Branding · Packaging design</p></div></article>
+<article class="tile rv" style="--d:.08s" data-c="Social media"><div class="card"><div class="art t5"></div><h3>Project five</h3><p>Social media · Story templates</p></div></article>
+<article class="tile rv" style="--d:.16s" data-c="Print"><div class="card"><div class="art t6"></div><h3>Project six</h3><p>Print · Brochure layout</p></div></article>
+</div>
+</section>
+
+<section id="services">
+<h2 class="rv">Services and pricing</h2>
+<p class="sub2 rv">Choose a package or ask for something custom. The prices and details below are placeholders: replace them with your own.</p>
+<div class="pk">
+<div class="plan rv"><h3>Logo design</h3><div class="price">From Rs. X,XXX</div><ul><li>3 concept directions</li><li>2 rounds of revisions</li><li>PNG, SVG and PDF files</li></ul><a class="btn ghost" href="#order" data-s="Logo design">Order this</a></div>
+<div class="plan hot rv" style="--d:.08s"><h3>Brand identity</h3><div class="price">From Rs. XX,XXX</div><ul><li>Logo and colour palette</li><li>Typography and brand guide PDF</li><li>Social media profile kit</li></ul><a class="btn" href="#order" data-s="Brand identity">Order this</a></div>
+<div class="plan rv" style="--d:.16s"><h3>Social media pack</h3><div class="price">From Rs. X,XXX</div><ul><li>10 post designs</li><li>Story templates</li><li>Editable source files</li></ul><a class="btn ghost" href="#order" data-s="Social media pack">Order this</a></div>
+</div>
+</section>
+
+<section id="process">
+<h2 class="rv">How it works</h2>
+<div class="steps">
+<div class="step rv"><h3>Brief</h3><p>You tell me about your business and what you need.</p></div>
+<div class="step rv" style="--d:.08s"><h3>Concepts</h3><p>I send sketches and first design directions.</p></div>
+<div class="step rv" style="--d:.16s"><h3>Revisions</h3><p>We refine the chosen concept together.</p></div>
+<div class="step rv" style="--d:.24s"><h3>Delivery</h3><p>You receive final files, ready to print or post.</p></div>
+</div>
+</section>
+
+<section id="order">
+<h2 class="rv">Start a project</h2>
+<p class="sub2 rv">Fill in the details. Your request opens in WhatsApp or email, ready to send, and I’ll reply with a quote.</p>
+<form class="ord rv" id="of" novalidate>
+<div class="fg">
+<div><label for="n">Your name</label><input id="n" name="n" autocomplete="name"></div>
+<div><label for="c">WhatsApp number or email</label><input id="c" name="c" autocomplete="email"></div>
+<div><label for="s">What do you need?</label><select id="s" name="s"><option>Logo design</option><option>Brand identity</option><option>Social media pack</option><option>Poster or flyer</option><option>Packaging</option><option>Something else</option></select></div>
+<div><label for="p">How will you pay?</label><select id="p" name="p"><option>Bank transfer</option><option>Online (PayPal or Payoneer)</option><option>Mobile wallet</option></select></div>
+<div><label for="b">Budget (optional)</label><input id="b" name="b" placeholder="For example, Rs. 15,000"></div>
+<div><label for="t">Deadline (optional)</label><input id="t" name="t" type="date"></div>
+<div class="full"><label for="d">Project details</label><textarea id="d" name="d" placeholder="Tell me about your business, style you like, and where the design will be used."></textarea></div>
+</div>
+<div class="acts"><button type="button" class="btn" id="wa">Send on WhatsApp</button><button type="button" class="btn ghost" id="em">Send by email</button></div>
+<p class="msg" id="fm" aria-live="polite"></p>
+</form>
+</section>
+
+<section id="pay">
+<h2 class="rv">Payment</h2>
+<p class="sub2 rv">After we agree on the quote, pay with any method below. Replace the sample details with your own, and edit the payment terms to match yours.</p>
+<div class="pay">
+<div class="pc rv"><h3>Bank transfer</h3><dl><dt>Bank</dt><dd>Your bank and branch</dd><dt>Account name</dt><dd>A W E H Abhishek De Silva</dd><dt>Account number</dt><dd id="acc">0000 0000 0000</dd></dl><button type="button" class="btn ghost" data-copy="#acc">Copy account number</button></div>
+<div class="pc rv" style="--d:.08s"><h3>Online payment</h3><dl><dt>For international clients</dt><dd>PayPal or Payoneer</dd><dt>How</dt><dd>Message me on WhatsApp and I’ll send a payment link</dd></dl><a class="btn" href="https://wa.me/94741037529" target="_blank" rel="noopener">Ask for payment link</a></div>
+<div class="pc rv" style="--d:.16s"><h3>Mobile wallet</h3><dl><dt>Genie, FriMi or eZ Cash</dt><dd id="mw">07X XXX XXXX</dd><dt>Name</dt><dd>A W E H Abhishek De Silva</dd></dl><button type="button" class="btn ghost" data-copy="#mw">Copy number</button></div>
+</div>
+<p class="sub2 rv" style="margin:24px 0 0">Payment terms: 50% advance to start, the balance before final files are delivered.</p>
+</section>
+
+<section id="about">
+<h2 class="rv">About</h2>
+<div class="two rv">
+<div>
+<p>Write two or three short sentences here: who you are, what kind of design you love, and who you like working with.</p>
+<p>Tell clients how you work: you listen first, share sketches early and deliver files ready to use.</p>
+</div>
+<ul class="clean">
+<li>Logo design</li><li>Brand identity</li><li>Social media posts</li><li>Posters and flyers</li><li>Packaging</li>
+</ul>
+</div>
+</section>
+
+<section id="contact">
+<h2 class="rv">Let’s build something</h2>
+<p class="rv"><a class="big" href="mailto:abhicreations128@gmail.com">abhicreations128@gmail.com</a></p>
+<div class="cc rv">
+<a class="ct" href="https://wa.me/94741037529" target="_blank" rel="noopener"><b>WA</b><div>WhatsApp<span>+94 74 103 7529</span></div></a>
+<a class="ct" href="mailto:abhicreations128@gmail.com"><b>@</b><div>Email<span>abhicreations128@gmail.com</span></div></a>
+<a class="ct" href="https://www.linkedin.com/in/eshan-harshana-a53820243" target="_blank" rel="noopener"><b>in</b><div>LinkedIn<span>linkedin.com/in/eshan-harshana-a53820243</span></div></a>
+</div>
+</section>
+<footer>© <span id="y">2026</span> A W E H Abhishek De Silva</footer>
+</div>
+
+<script>
+(function(){
+var doc=document.documentElement,rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+doc.classList.add("js");
+var $=function(s){return document.querySelector(s)},$$=function(s){return document.querySelectorAll(s)};
+$("#y").textContent=new Date().getFullYear();
+
+/* filter */
+var fb=$$(".filters button"),tl=$$(".tile");
+fb.forEach(function(x){x.addEventListener("click",function(){
+var f=x.getAttribute("data-f");
+fb.forEach(function(o){o.setAttribute("aria-pressed",o===x?"true":"false")});
+tl.forEach(function(c){c.hidden=!(f==="all"||c.getAttribute("data-c")===f)});
+})});
+
+/* scroll reveal */
+var rv=$$(".rv");
+if("IntersectionObserver" in window&&!rm){
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
+rv.forEach(function(e){io.observe(e)});
+}else rv.forEach(function(e){e.classList.add("in")});
+
+/* scramble name */
+var nm=$("#name"),final="Abhishek De Silva",ch="!<>-_/[]{}=+*^?#01";
+function scramble(){
+var f=0,t=final.length*3+10;
+(function s(){
+var o="";
+for(var i=0;i<final.length;i++){o+=(final[i]===" "||f>i*3+8)?final[i]:ch[Math.floor(Math.random()*ch.length)]}
+nm.textContent=o;
+if(f++<t)requestAnimationFrame(s);else nm.textContent=final;
+})();
+}
+if(!rm){scramble();nm.addEventListener("pointerenter",scramble)}
+
+/* typing roles */
+var roles=["Graphic designer","Logo designer","Brand identity maker","Social media creator"],ri=0,ci=0,del=false,re=$("#role");
+function type(){
+var w=roles[ri];
+ci+=del?-1:1;
+re.textContent=w.slice(0,ci);
+var d=del?35:75;
+if(!del&&ci===w.length){del=true;d=1400}
+else if(del&&ci===0){del=false;ri=(ri+1)%roles.length;d=300}
+setTimeout(type,d);
+}
+if(!rm){re.textContent="";type()}
+
+/* cursor glow, card tilt, magnetic button */
+var gl=$("#glow"),fine=matchMedia("(pointer: fine)").matches;
+if(fine&&!rm){
+addEventListener("pointermove",function(e){gl.style.opacity=1;gl.style.transform="translate("+e.clientX+"px,"+e.clientY+"px)"});
+$$(".card").forEach(function(c){
+c.addEventListener("pointermove",function(e){
+var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+c.style.setProperty("--mx",x*100+"%");c.style.setProperty("--my",y*100+"%");
+c.style.transform="rotateY("+((x-.5)*10)+"deg) rotateX("+((.5-y)*10)+"deg)";
+});
+c.addEventListener("pointerleave",function(){c.style.transform=""});
+});
+var mg=$("#mag");
+mg.addEventListener("pointermove",function(e){
+var r=mg.getBoundingClientRect();
+mg.style.transform="translate("+((e.clientX-r.left-r.width/2)*.25)+"px,"+((e.clientY-r.top-r.height/2)*.35)+"px)";
+});
+mg.addEventListener("pointerleave",function(){mg.style.transform=""});
+}
+
+/* order form: change these two values to your real WhatsApp number (country code, no plus) and email */
+var WA="94741037529",EM="abhicreations128@gmail.com";
+var fo=$("#of"),ms=$("#fm");
+function brief(){
+var g=function(k){return fo.elements[k].value.trim()};
+if(!g("n")||!g("c")||!g("d")){ms.textContent="Please fill in your name, contact and project details.";return null}
+ms.textContent="";
+return "New project request\nName: "+g("n")+"\nContact: "+g("c")+"\nService: "+g("s")+"\nBudget: "+(g("b")||"-")+"\nDeadline: "+(g("t")||"-")+"\nPayment: "+g("p")+"\n\nDetails:\n"+g("d");
+}
+$("#wa").addEventListener("click",function(){var t=brief();if(t){ms.textContent="Opening WhatsApp…";window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(t),"_blank","noopener")}});
+$("#em").addEventListener("click",function(){var t=brief();if(t){ms.textContent="Opening your email app…";location.href="mailto:"+EM+"?subject="+encodeURIComponent("Project request: "+fo.elements.s.value)+"&body="+encodeURIComponent(t)}});
+fo.addEventListener("submit",function(e){e.preventDefault()});
+$$("[data-s]").forEach(function(a){a.addEventListener("click",function(){fo.elements.s.value=a.getAttribute("data-s")})});
+$$("[data-copy]").forEach(function(b){b.addEventListener("click",function(){
+var v=$(b.getAttribute("data-copy")).textContent,o=b.textContent;
+try{navigator.clipboard.writeText(v).then(function(){b.textContent="Copied"},function(){b.textContent="Select and copy"})}catch(x){b.textContent="Select and copy"}
+setTimeout(function(){b.textContent=o},1800);
+})});
+
+/* particle network */
+var cv=$("#net"),cx=cv.getContext("2d"),W,H,P=[],m={x:-999,y:-999},col="#3DE0FF",dpr=Math.min(devicePixelRatio||1,2);
+function size(){
+var r=cv.getBoundingClientRect();W=r.width;H=r.height;
+cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);
+var n=Math.min(70,Math.floor(W/16));P=[];
+for(var i=0;i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4});
+col=getComputedStyle(doc).getPropertyValue("--cyan").trim()||col;
+}
+function draw(){
+cx.clearRect(0,0,W,H);
+cx.fillStyle=col;cx.strokeStyle=col;
+for(var i=0;i<P.length;i++){
+var a=P[i];
+if(!rm){
+a.x+=a.vx;a.y+=a.vy;
+if(a.x<0||a.x>W)a.vx*=-1;
+if(a.y<0||a.y>H)a.vy*=-1;
+var dx=m.x-a.x,dy=m.y-a.y,d=Math.hypot(dx,dy);
+if(d<140&&d>0){a.x+=dx/d*.7;a.y+=dy/d*.7}
+}
+cx.globalAlpha=.8;cx.beginPath();cx.arc(a.x,a.y,2,0,6.283);cx.fill();
+for(var j=i+1;j<P.length;j++){
+var b=P[j],l=Math.hypot(a.x-b.x,a.y-b.y);
+if(l<120){cx.globalAlpha=(1-l/120)*.45;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()}
+}
+}
+if(!rm)requestAnimationFrame(draw);
+}
+cv.parentNode.addEventListener("pointermove",function(e){var r=cv.getBoundingClientRect();m.x=e.clientX-r.left;m.y=e.clientY-r.top});
+cv.parentNode.addEventListener("pointerleave",function(){m.x=m.y=-999});
+var rt;addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(function(){size();if(rm)draw()},150)});
+matchMedia("(prefers-color-scheme: light)").addEventListener("change",function(){setTimeout(function(){size();if(rm)draw()},50)});
+size();draw();
+})();
+</script>
+</body>
+</html>
