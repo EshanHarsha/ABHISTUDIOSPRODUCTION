@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Admin panel</title>
+<style>
+:root{--bg:#0B0F2A;--panel:#151A3D;--ink:#E8ECFF;--muted:#96A0CC;--line:#2A3266;--cyan:#3DE0FF;--pink:#FF5C8A;--on:#0B0F2A}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;padding:16px}
+.w{max-width:860px;margin:0 auto}h1{font-size:1.5rem;margin:8px 0 12px}h2{font-size:1.2rem;margin:0 0 8px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+label{display:block;font-size:.85rem;color:var(--muted);margin:10px 0 4px}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px}textarea{min-height:80px}
+button{font:inherit;font-weight:600;border:0;border-radius:8px;padding:10px 16px;background:var(--cyan);color:var(--on);cursor:pointer}
+button.d{background:var(--pink);color:#fff}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tabs button{background:var(--panel);color:var(--ink);border:1px solid var(--line)}.tabs button.on{background:var(--cyan);color:var(--on)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.it{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.it img{width:64px;height:48px;object-fit:cover;border-radius:6px}.it div{flex:1;min-width:0}small{color:var(--muted)}#msg{color:var(--cyan);min-height:1.4em}.hide{display:none}
+</style></head><body><div class="w">
+<h1>Admin panel</h1><p id="msg" role="status"></p>
+<div id="login" class="card"><h2>Log in</h2><label for="em">Email</label><input id="em" type="email" autocomplete="username"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password"><div class="row"><button id="li" type="button">Log in</button></div></div>
+<div id="app" class="hide">
+<div class="tabs" id="tabs"><button data-t="projects" class="on">Projects</button><button data-t="orders">Orders</button><button data-t="prices">Prices</button><button data-t="pay">Payment details</button><button id="lo">Log out</button></div>
+<div id="projects" class="pane"><div class="card"><h2>Add a project</h2><label for="pt">Title</label><input id="pt"><label for="pc">Category</label><select id="pc"><option>Branding</option><option>Social media</option><option>Print</option></select><label for="pd">Short description</label><textarea id="pd"></textarea><label for="pf">Photo</label><input id="pf" type="file" accept="image/*"><div class="row"><button id="padd" type="button">Add project</button></div></div><div class="card"><h2>Your projects</h2><div id="plist"></div></div></div>
+<div id="orders" class="pane hide"><div id="olist"></div></div>
+<div id="prices" class="pane hide"><div id="klist"></div><button id="kadd" type="button">Add package</button></div>
+<div id="pay" class="pane hide"><div class="card"><h2>Payment details</h2><label for="s1">Bank and branch</label><input id="s1"><label for="s2">Account name</label><input id="s2"><label for="s3">Account number</label><input id="s3"><label for="s4">Mobile wallet number</label><input id="s4"><label for="s5">Payment terms</label><textarea id="s5"></textarea><div class="row"><button id="ssave" type="button">Save</button></div></div></div>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+<script>
+(function(){
+var C=window.SITE_CONFIG,$=function(s){return document.querySelector(s)},all=function(s){return document.querySelectorAll(s)};
+function say(t){$("#msg").textContent=t}
+if(!C||C.url.indexOf("YOUR")>-1){say("Open config.js and paste your Supabase URL and key first.");return}
+var sb=supabase.createClient(C.url,C.key);
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function ok(r,m){if(r.error){say("Error: "+r.error.message);return false}say(m||"Saved");return true}
+function show(v){$("#login").classList.toggle("hide",v);$("#app").classList.toggle("hide",!v);if(v){loadProjects();loadOrders();loadPk();loadSet()}}
+sb.auth.getSession().then(function(r){show(!!r.data.session)});
+$("#li").onclick=function(){sb.auth.signInWithPassword({email:$("#em").value.trim(),password:$("#pw").value}).then(function(r){if(r.error)say(r.error.message);else{say("");show(true)}})};
+$("#lo").onclick=function(){sb.auth.signOut().then(function(){show(false)})};
+$("#tabs").addEventListener("click",function(e){var t=e.target.getAttribute("data-t");if(!t)return;
+all(".pane").forEach(function(p){p.classList.toggle("hide",p.id!==t)});all("#tabs button").forEach(function(b){b.classList.toggle("on",b===e.target)})});
+function shrink(f){return new Promise(function(res){var i=new Image(),u=URL.createObjectURL(f);i.onload=function(){var s=Math.min(1,1400/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=i.width*s;c.height=i.height*s;c.getContext("2d").drawImage(i,0,0,c.width,c.height);c.toBlob(function(b){URL.revokeObjectURL(u);res(b)},"image/jpeg",.85)};i.onerror=function(){res(f)};i.src=u})}
+function loadProjects(){sb.from("projects").select("*").order("sort").order("created_at",{ascending:false}).then(function(r){
+$("#plist").innerHTML=(r.data||[]).map(function(p){return '<div class="it">'+(p.image_url?'<img src="'+esc(p.image_url)+'" alt="">':'')+'<div><b>'+esc(p.title)+'</b><br><small>'+esc(p.category)+'</small></div><button class="d" data-del="'+p.id+'">Delete</button></div>'}).join("")||"<small>No projects yet.</small>"})}
+$("#padd").onclick=function(){var t=$("#pt").value.trim(),f=$("#pf").files[0];if(!t){say("Enter a title");return}say("Saving…");
+(f?shrink(f).then(function(b){var path=Date.now()+".jpg";return sb.storage.from("projects").upload(path,b,{contentType:"image/jpeg"}).then(function(r){if(r.error)throw r.error;return sb.storage.from("projects").getPublicUrl(path).data.publicUrl})}):Promise.resolve(null))
+.then(function(url){return sb.from("projects").insert({title:t,category:$("#pc").value,description:$("#pd").value.trim(),image_url:url})})
+.then(function(r){if(ok(r,"Project added")){$("#pt").value="";$("#pd").value="";$("#pf").value="";loadProjects()}}).catch(function(e){say("Error: "+e.message)})};
+function loadOrders(){sb.from("orders").select("*").order("created_at",{ascending:false}).then(function(r){
+$("#olist").innerHTML=(r.data||[]).map(function(o){return '<div class="card"><b>'+esc(o.name)+'</b> · '+esc(o.service)+'<br><small>'+new Date(o.created_at).toLocaleString()+' · '+esc(o.contact)+' · Budget: '+esc(o.budget||"-")+' · Deadline: '+esc(o.deadline||"-")+' · Pay: '+esc(o.payment)+'</small><p>'+esc(o.details)+'</p><select data-st="'+o.id+'">'+["new","quoted","paid","done"].map(function(s){return '<option'+(s===o.status?' selected':'')+'>'+s+'</option>'}).join("")+'</select> <button class="d" data-od="'+o.id+'">Delete</button></div>'}).join("")||"<small>No orders yet.</small>"})}
+function loadPk(){sb.from("packages").select("*").order("sort").order("created_at").then(function(r){
+$("#klist").innerHTML=(r.data||[]).map(function(p){return '<div class="card" data-k="'+p.id+'"><label>Name</label><input class="n" value="'+esc(p.name)+'"><label>Price</label><input class="p" value="'+esc(p.price)+'"><label>What is included (one per line)</label><textarea class="f">'+esc(p.features)+'</textarea><label><input type="checkbox" class="h" style="width:auto"'+(p.featured?' checked':'')+'> Highlight this package</label><div class="row"><button data-ks="'+p.id+'">Save</button><button class="d" data-kd="'+p.id+'">Delete</button></div></div>'}).join("")})}
+$("#kadd").onclick=function(){sb.from("packages").insert({name:"New package",price:"From Rs. ",features:"",sort:10}).then(function(r){if(ok(r,"Package added"))loadPk()})};
+var K={bank:"#s1",account_name:"#s2",account_number:"#s3",wallet:"#s4",terms:"#s5"};
+function loadSet(){sb.from("settings").select("*").then(function(r){(r.data||[]).forEach(function(x){if(K[x.key])$(K[x.key]).value=x.value})})}
+$("#ssave").onclick=function(){sb.from("settings").upsert(Object.keys(K).map(function(k){return{key:k,value:$(K[k]).value.trim()}})).then(function(r){ok(r,"Payment details saved")})};
+document.addEventListener("click",function(e){var b=e.target,id;
+if(id=b.getAttribute("data-del")){if(confirm("Delete this project?"))sb.from("projects").delete().eq("id",id).then(function(r){if(ok(r,"Deleted"))loadProjects()})}
+else if(id=b.getAttribute("data-od")){if(confirm("Delete this order?"))sb.from("orders").delete().eq("id",id).then(function(r){if(ok(r,"Deleted"))loadOrders()})}
+else if(id=b.getAttribute("data-kd")){if(confirm("Delete this package?"))sb.from("packages").delete().eq("id",id).then(function(r){if(ok(r,"Deleted"))loadPk()})}
+else if(id=b.getAttribute("data-ks")){var c=$('[data-k="'+id+'"]');sb.from("packages").update({name:c.querySelector(".n").value.trim(),price:c.querySelector(".p").value.trim(),features:c.querySelector(".f").value,featured:c.querySelector(".h").checked}).eq("id",id).then(function(r){ok(r,"Package saved")})}});
+document.addEventListener("change",function(e){var id=e.target.getAttribute("data-st");if(id)sb.from("orders").update({status:e.target.value}).eq("id",id).then(function(r){ok(r,"Status updated")})});
+})();
+</script></body></html>

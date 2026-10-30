@@ -3,7 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>A W E h Abhishek De Silva – Graphic Designer</title>
+<title>A W E H Abhishek De Silva – Graphic Designer</title>
+<meta name="description" content="Abhishek De Silva is a graphic designer making logos, brand identities and social media designs. See his work and start a project.">
+<meta property="og:title" content="A W E H Abhishek De Silva – Graphic Designer">
+<meta property="og:description" content="Logos, brand identities and social media design. See the work and start a project.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
@@ -139,7 +143,6 @@ button.btn.ghost{border:1px solid var(--line)}
 <div class="wrap">
 <section id="work">
 <h2 class="rv">Selected work</h2>
-<div class="note rv">Placeholder projects: replace each title, category and description with your real work.</div>
 <div class="filters rv" role="group" aria-label="Filter projects">
 <button type="button" data-f="all" aria-pressed="true">All</button>
 <button type="button" data-f="Branding" aria-pressed="false">Branding</button>
@@ -158,7 +161,7 @@ button.btn.ghost{border:1px solid var(--line)}
 
 <section id="services">
 <h2 class="rv">Services and pricing</h2>
-<p class="sub2 rv">Choose a package or ask for something custom. The prices and details below are placeholders: replace them with your own.</p>
+<p class="sub2 rv">Choose a package or ask for something custom.</p>
 <div class="pk">
 <div class="plan rv"><h3>Logo design</h3><div class="price">From Rs. X,XXX</div><ul><li>3 concept directions</li><li>2 rounds of revisions</li><li>PNG, SVG and PDF files</li></ul><a class="btn ghost" href="#order" data-s="Logo design">Order this</a></div>
 <div class="plan hot rv" style="--d:.08s"><h3>Brand identity</h3><div class="price">From Rs. XX,XXX</div><ul><li>Logo and colour palette</li><li>Typography and brand guide PDF</li><li>Social media profile kit</li></ul><a class="btn" href="#order" data-s="Brand identity">Order this</a></div>
@@ -196,13 +199,13 @@ button.btn.ghost{border:1px solid var(--line)}
 
 <section id="pay">
 <h2 class="rv">Payment</h2>
-<p class="sub2 rv">After we agree on the quote, pay with any method below. Replace the sample details with your own, and edit the payment terms to match yours.</p>
+<p class="sub2 rv">After we agree on the quote, pay with any method below.</p>
 <div class="pay">
-<div class="pc rv"><h3>Bank transfer</h3><dl><dt>Bank</dt><dd>Your bank and branch</dd><dt>Account name</dt><dd>A W E H Abhishek De Silva</dd><dt>Account number</dt><dd id="acc">0000 0000 0000</dd></dl><button type="button" class="btn ghost" data-copy="#acc">Copy account number</button></div>
+<div class="pc rv"><h3>Bank transfer</h3><dl><dt>Bank</dt><dd id="bk">Your bank and branch</dd><dt>Account name</dt><dd id="an">A W E H Abhishek De Silva</dd><dt>Account number</dt><dd id="acc">0000 0000 0000</dd></dl><button type="button" class="btn ghost" data-copy="#acc">Copy account number</button></div>
 <div class="pc rv" style="--d:.08s"><h3>Online payment</h3><dl><dt>For international clients</dt><dd>PayPal or Payoneer</dd><dt>How</dt><dd>Message me on WhatsApp and I’ll send a payment link</dd></dl><a class="btn" href="https://wa.me/94741037529" target="_blank" rel="noopener">Ask for payment link</a></div>
-<div class="pc rv" style="--d:.16s"><h3>Mobile wallet</h3><dl><dt>Genie, FriMi or eZ Cash</dt><dd id="mw">07X XXX XXXX</dd><dt>Name</dt><dd>A W E H Abhishek De Silva</dd></dl><button type="button" class="btn ghost" data-copy="#mw">Copy number</button></div>
+<div class="pc rv" style="--d:.16s"><h3>Mobile wallet</h3><dl><dt>Genie, FriMi or eZ Cash</dt><dd id="mw">07X XXX XXXX</dd><dt>Name</dt><dd id="wn">A W E H Abhishek De Silva</dd></dl><button type="button" class="btn ghost" data-copy="#mw">Copy number</button></div>
 </div>
-<p class="sub2 rv" style="margin:24px 0 0">Payment terms: 50% advance to start, the balance before final files are delivered.</p>
+<p class="sub2 rv" style="margin:24px 0 0">Payment terms: <span id="tm">50% advance to start, the balance before final files are delivered.</span></p>
 </section>
 
 <section id="about">
@@ -230,6 +233,8 @@ button.btn.ghost{border:1px solid var(--line)}
 <footer>© <span id="y">2026</span> A W E H Abhishek De Silva</footer>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
 <script>
 (function(){
 var doc=document.documentElement,rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -242,7 +247,7 @@ var fb=$$(".filters button"),tl=$$(".tile");
 fb.forEach(function(x){x.addEventListener("click",function(){
 var f=x.getAttribute("data-f");
 fb.forEach(function(o){o.setAttribute("aria-pressed",o===x?"true":"false")});
-tl.forEach(function(c){c.hidden=!(f==="all"||c.getAttribute("data-c")===f)});
+$$(".tile").forEach(function(c){c.hidden=!(f==="all"||c.getAttribute("data-c")===f)});
 })});
 
 /* scroll reveal */
@@ -282,14 +287,15 @@ if(!rm){re.textContent="";type()}
 var gl=$("#glow"),fine=matchMedia("(pointer: fine)").matches;
 if(fine&&!rm){
 addEventListener("pointermove",function(e){gl.style.opacity=1;gl.style.transform="translate("+e.clientX+"px,"+e.clientY+"px)"});
-$$(".card").forEach(function(c){
+var bindTilt=function(c){
 c.addEventListener("pointermove",function(e){
 var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
 c.style.setProperty("--mx",x*100+"%");c.style.setProperty("--my",y*100+"%");
 c.style.transform="rotateY("+((x-.5)*10)+"deg) rotateX("+((.5-y)*10)+"deg)";
 });
 c.addEventListener("pointerleave",function(){c.style.transform=""});
-});
+};
+$$(".card").forEach(bindTilt);window.bindTilt=bindTilt;
 var mg=$("#mag");
 mg.addEventListener("pointermove",function(e){
 var r=mg.getBoundingClientRect();
@@ -307,8 +313,8 @@ if(!g("n")||!g("c")||!g("d")){ms.textContent="Please fill in your name, contact 
 ms.textContent="";
 return "New project request\nName: "+g("n")+"\nContact: "+g("c")+"\nService: "+g("s")+"\nBudget: "+(g("b")||"-")+"\nDeadline: "+(g("t")||"-")+"\nPayment: "+g("p")+"\n\nDetails:\n"+g("d");
 }
-$("#wa").addEventListener("click",function(){var t=brief();if(t){ms.textContent="Opening WhatsApp…";window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(t),"_blank","noopener")}});
-$("#em").addEventListener("click",function(){var t=brief();if(t){ms.textContent="Opening your email app…";location.href="mailto:"+EM+"?subject="+encodeURIComponent("Project request: "+fo.elements.s.value)+"&body="+encodeURIComponent(t)}});
+$("#wa").addEventListener("click",function(){var t=brief();if(t){saveOrder();ms.textContent="Opening WhatsApp…";window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(t),"_blank","noopener")}});
+$("#em").addEventListener("click",function(){var t=brief();if(t){saveOrder();ms.textContent="Opening your email app…";location.href="mailto:"+EM+"?subject="+encodeURIComponent("Project request: "+fo.elements.s.value)+"&body="+encodeURIComponent(t)}});
 fo.addEventListener("submit",function(e){e.preventDefault()});
 $$("[data-s]").forEach(function(a){a.addEventListener("click",function(){fo.elements.s.value=a.getAttribute("data-s")})});
 $$("[data-copy]").forEach(function(b){b.addEventListener("click",function(){
@@ -316,6 +322,28 @@ var v=$(b.getAttribute("data-copy")).textContent,o=b.textContent;
 try{navigator.clipboard.writeText(v).then(function(){b.textContent="Copied"},function(){b.textContent="Select and copy"})}catch(x){b.textContent="Select and copy"}
 setTimeout(function(){b.textContent=o},1800);
 })});
+
+/* backend (Supabase, see config.js): projects, prices, payment details and saved orders */
+var cfg=window.SITE_CONFIG,sb=null;
+if(window.supabase&&cfg&&cfg.url&&cfg.url.indexOf("YOUR")<0){try{sb=supabase.createClient(cfg.url,cfg.key)}catch(x){}}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function saveOrder(){if(!sb)return;var g=function(k){return fo.elements[k].value.trim()};
+sb.from("orders").insert({name:g("n"),contact:g("c"),service:g("s"),payment:g("p"),budget:g("b"),deadline:g("t"),details:g("d")}).then(function(){},function(){})}
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-s]");if(!a)return;
+var v=a.getAttribute("data-s"),s=fo.elements.s,has=false;for(var i=0;i<s.options.length;i++)if(s.options[i].text===v)has=true;if(!has)s.add(new Option(v));s.value=v});
+if(sb){
+sb.from("projects").select("*").order("sort").order("created_at",{ascending:false}).then(function(r){
+if(r.error||!r.data)return;
+var cl=["t1","t2","t3","t4","t5","t6"];
+$(".grid").innerHTML=r.data.length?r.data.map(function(p,i){return '<article class="tile rv in" data-c="'+esc(p.category)+'"><div class="card"><div class="art '+(p.image_url?"":cl[i%6])+'">'+(p.image_url?'<img src="'+esc(p.image_url)+'" alt="'+esc(p.title)+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">':"")+'</div><h3>'+esc(p.title)+'</h3><p>'+esc(p.category)+(p.description?" · "+esc(p.description):"")+'</p></div></article>'}).join(""):'<p class="sub2">New projects are coming soon.</p>';
+if(window.bindTilt)$$(".card").forEach(window.bindTilt)});
+sb.from("packages").select("*").order("sort").order("created_at").then(function(r){
+if(r.error||!r.data||!r.data.length)return;
+$(".pk").innerHTML=r.data.map(function(p){return '<div class="plan'+(p.featured?" hot":"")+' rv in"><h3>'+esc(p.name)+'</h3><div class="price">'+esc(p.price)+'</div><ul>'+String(p.features||"").split("\n").filter(Boolean).map(function(f){return"<li>"+esc(f)+"</li>"}).join("")+'</ul><a class="btn'+(p.featured?"":" ghost")+'" href="#order" data-s="'+esc(p.name)+'">Order this</a></div>'}).join("")});
+sb.from("settings").select("*").then(function(r){
+if(r.error||!r.data)return;
+var m={bank:"#bk",account_name:"#an,#wn",account_number:"#acc",wallet:"#mw",terms:"#tm"};
+r.data.forEach(function(x){if(m[x.key]&&x.value)$$(m[x.key]).forEach(function(e){e.textContent=x.value})})})}
 
 /* particle network */
 var cv=$("#net"),cx=cv.getContext("2d"),W,H,P=[],m={x:-999,y:-999},col="#3DE0FF",dpr=Math.min(devicePixelRatio||1,2);
